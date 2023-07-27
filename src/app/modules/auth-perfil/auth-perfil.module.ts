@@ -6,6 +6,9 @@ import { AuthPerfilComponent } from './auth-perfil.component';
 import { LoginComponent } from './login/login.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RegistroComponent } from './registro/registro.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -17,7 +20,11 @@ import { RegistroComponent } from './registro/registro.component';
   imports: [
     CommonModule,
     AuthPerfilRoutingModule,
-    SharedModule
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
+    HttpClientModule
   ]
 })
 export class AuthPerfilModule { }

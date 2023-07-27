@@ -12,51 +12,66 @@
 		<div class="row justify-content-center">
 			<div class="col-xl-5 col-lg-7 col-md-9">
 				<div class="register_form padding_default shadow_sm">
-					<h4 class="title_2">Create an account</h4>
-					<p class="mb-4 text_md">Register here if you are a new customer.</p>
-					<form action="">
+					<h4 class="title_2">Crear Una Cuenta</h4>
+					<p class="mb-4 text_md">Registrate Aquí si eres un Nuevo Usuario</p>
+					<form [formGroup]="formRegistro" (ngSubmit)="onSubmit()">
 						<div class="row">
 							<div class="col-12">
 								<div class="single_billing_inp">
-									<label>Full Name <span>*</span></label>
-									<input type="text" placeholder="Jone Doe">
+									<label for="name">Nombre <span>*</span></label>
+									<input type="text" formControlName="name" placeholder="Nombre">
+								</div>
+							</div>
+
+							<div class="col-12">
+								<div class="single_billing_inp">
+									<label for="lastname">Apellidos <span>*</span></label>
+									<input type="text" formControlName="lastname" placeholder="Apellidos">
+								</div>
+							</div>
+
+							<div class="col-12">
+								<div class="single_billing_inp">
+									<label for="email">Correo Electrónico <span>*</span></label>
+									<input type="email" formControlName="email" placeholder="ejemplo@mail.com">
 								</div>
 							</div>
 							<div class="col-12">
 								<div class="single_billing_inp">
-									<label>Email Address <span>*</span></label>
-									<input type="email" placeholder="example@mail.com">
+									<label for="password">Contraseña <span>*</span></label>
+								  <input type="password" formControlName="password" placeholder="Contraseña">
+								  <div *ngIf="formRegistro?.get('password')?.errors && formRegistro?.get('password')?.touched">
+									<div *ngIf="formRegistro.get('password')?.hasError('required')">La contraseña es requerida.</div>
+									<div *ngIf="formRegistro.get('password')?.hasError('minlength')">La contraseña debe tener al menos 6 caracteres.</div>
+								  </div>
 								</div>
 							</div>
 							<div class="col-12">
 								<div class="single_billing_inp">
-									<label>Password <span>*</span></label>
-									<input type="password" placeholder="type password">
+									<label for="password_confirmation">Confirmar Contraseña <span>*</span></label>
+									<input type="password" formControlName="password_confirmation" placeholder="Repite la Contraseña">
+									<div *ngIf="formRegistro?.hasError('mismatch') && formRegistro?.get('password_confirmation')?.touched">
+										Las contraseñas no coinciden.
+									</div>
 								</div>
 							</div>
-							<div class="col-12">
-								<div class="single_billing_inp">
-									<label>Confirm Password <span>*</span></label>
-									<input type="password" placeholder="confirm your password">
-								</div>
-							</div>
+
 							<div class="col-12 mt-2">
 								<div class="custom_check check_2 d-flex align-items-center">
 									<input type="checkbox" class="check_inp" hidden id="save-default">
-									<label for="save-default">I have read and agree to the <a href="terms-condition.html"
-											class="text-color">terms & conditions</a> </label>
+									<label for="save-default">He Leído y Acepto los <a href="terms-condition.html"
+											class="text-color">Términos Y Condiciones</a> </label>
 								</div>
 							</div>
 							<div class="col-12 mt-3">
-								<button type="submit" class="default_btn xs_btn rounded px-4 d-block w-100">create
-									account</button>
+								<button type="submit" [disabled]="formRegistro.invalid" class="default_btn xs_btn rounded px-4 d-block w-100">Crear Cuenta</button>
 							</div>
 
 						</div>
 					</form>
 
 					<div class="dif_regway my-3">
-						<span class="txt">Or singup in with</span>
+						<span class="txt">O Ingresa con Tu Cuenta de</span>
 					</div>
 
 					<div class="d-flex">
@@ -68,8 +83,7 @@
 						</button>
 					</div>
 
-					<p class="text-center mt-3 mb-0">Already have an account.? <a href="login.html" class="text-color">Login Now</a></p>
-
+					<p class="text-center mt-3 mb-0">Ya Tienes una Cuenta? <a routerLink="/auth/login" class="text-color">Ingresa Ahora</a></p>
 				</div>
 			</div>
 		</div>
